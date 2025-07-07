@@ -1,0 +1,81 @@
+const columns = [
+  {
+    header: "#",
+    id: "rowIndex",
+    accessorKey: "rowIndex",
+    cell: ({ row }: { row: any }) => row.index + 1,
+    background: "#FFFFF",
+  },
+  {
+    header: "Job Request",
+    accessorKey: "Job Request",
+    id: "1",
+    cell: ({ row }: { row: any }) => row.original["Job Request"],
+    background: "#EEEEEE",
+  },
+  {
+    header: "Submitted",
+    accessorKey: "Submitted",
+    id: "1",
+    cell: ({ row }: { row: any }) => row.original["Submitted"],
+    background: "#EEEEEE",
+  },
+  {
+    header: "Status",
+    accessorKey: "Status",
+    id: "1",
+    cell: ({ row }: { row: any }) => row.original["Status"],
+    background: "#EEEEEE",
+  },
+  {
+    header: "Submitter",
+    accessorKey: "Submitter",
+    id: "1",
+    cell: ({ row }: { row: any }) => row.original["Submitter"],
+    background: "#EEEEEE",
+  },
+  {
+    header: "URL",
+    accessorKey: "URL",
+    id: "2",
+    cell: ({ row }: { row: any }) => row.original["URL"],
+    background: "#EEEEEE",
+  },
+  {
+    header: "Assigned",
+    accessorKey: "Assigned",
+    id: "3",
+    cell: ({ row }: { row: any }) => row.original["Assigned"],
+    background: "#E8F0E9",
+  },
+  {
+    header: "Priority",
+    accessorKey: "Priority",
+    id: "4",
+    cell: ({ row }: { row: any }) => row.original["Priority"],
+    background: "#EAE3FC",
+  },
+  {
+    header: "Due Date",
+    accessorKey: "Due Date",
+    id: "4",
+    cell: ({ row }: { row: any }) => row.original["Due Date"],
+    background: "#EAE3FC",
+  },
+  {
+    header: "Ext. Value",
+    accessorKey: "Ext. Value",
+    id: "5",
+    cell: ({ row }: { row: any }) => row.original["Ext. Value"],
+    background: "#FFE9E0",
+  },
+  {
+    header: "Icon",
+    accessorKey: "Icon",
+    id: "6",
+    cell: ({ row }: { row: any }) => ``,
+    background: "#FFFFF",
+  },
+];
+
+export default columns;
