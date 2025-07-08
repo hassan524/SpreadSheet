@@ -16,7 +16,7 @@ const Tables = () => {
   });
 
   const statusBgMap: Record<string, string> = {
-    "In Process": "#282320",
+    "In Process": "#FFF3D6",
     "Complete": "#D3F2E3",
     "Blocked": "#FFE1DE",
     "Need to Start": "#E2E8F0",
@@ -25,7 +25,7 @@ const Tables = () => {
   };
 
   const statusTextColorMap: Record<string, string> = {
-    "In Process": "#FFFFFF",
+    "In Process": "#8C6D18",
     "Complete": "#155724",
     "Blocked": "#721c24",
     "Need to Start": "#2D3748",
@@ -40,7 +40,7 @@ const Tables = () => {
   };
 
   return (
-    <div className="h-[80vh] overflow-scroll min-w-full font-sans">
+    <div className="h-[70vh] overflow-scroll min-w-full font-sans">
       <div className="min-w-[1000px]">
         <SubHeader />
 
@@ -50,7 +50,6 @@ const Tables = () => {
             {table.getHeaderGroups().map((headerGroup) =>
               headerGroup.headers.map((header) => {
                 const key = header.column.columnDef.accessorKey || header.column.id;
-
                 return (
                   <div
                     key={header.id}
@@ -92,42 +91,48 @@ const Tables = () => {
               const key = cell.column.columnDef.accessorKey || cell.column.id;
               const cellValue = cell.getValue();
 
-              const baseStyle = {
-                ...getCellStyle(key),
-                overflow: "hidden",
-                textOverflow: "ellipsis" as const,
-                whiteSpace: "nowrap" as const,
-              };
-
-              if (key === "Priority") {
-                Object.assign(baseStyle, {
-                  justifyContent: "center",
-                  fontWeight: "bold",
-                  color: priorityTextColorMap[String(cellValue)] || "#000",
-                });
-              }
-
-              if (key === "Submitted" || key === "Due Date" || key === "Ext. Value") {
-                baseStyle.justifyContent = "end";
-              }
-
-              if (key === "Status") {
-                baseStyle.justifyContent = "center";
-              }
-
-              if (key === "rowIndex") {
-                Object.assign(baseStyle, {
-                  justifyContent: "center",
-                  color: "#757575",
-                });
-              }
-
-              if (key === "URL") {
-                baseStyle.padding = "0 5px";
-              }
-
               return (
-                <div key={cell.id} className="flex items-center px-2" style={baseStyle}>
+                <div
+                  key={cell.id}
+                  className="flex items-center px-2"
+                  style={{
+                    ...getCellStyle(key),
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+
+                    ...(key === "Priority" && {
+                      justifyContent: "center",
+                      fontWeight: "bold",
+                      color: priorityTextColorMap[String(cellValue)] || "#000",
+                    }),
+
+                    ...(key === "Submitted" && {
+                      justifyContent: "end",
+                    }),
+
+                    ...(key === "Due Date" && {
+                      justifyContent: "end",
+                    }),
+
+                    ...(key === "Ext. Value" && {
+                      justifyContent: "end",
+                    }),
+
+                    ...(key === "Status" && {
+                      justifyContent: "center",
+                    }),
+
+                    ...(key === "rowIndex" && {
+                      justifyContent: "center",
+                      color: "#757575",
+                    }),
+
+                    ...(key === "URL" && {
+                      padding: "0 5px",
+                    }),
+                  }}
+                >
                   {key === "Status" ? (
                     <span
                       style={{
@@ -137,6 +142,10 @@ const Tables = () => {
                         color: statusTextColorMap[cellValue] || "#333",
                         fontWeight: 500,
                         fontSize: "13px",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        whiteSpace: "nowrap",
+                        maxWidth: "100%",
                       }}
                     >
                       {cellValue}
@@ -149,11 +158,11 @@ const Tables = () => {
                       style={{
                         textDecoration: "underline",
                         cursor: "pointer",
-                        display: "inline-block",
                         overflow: "hidden",
                         textOverflow: "ellipsis",
                         whiteSpace: "nowrap",
                         maxWidth: "100%",
+                        display: "inline-block",
                       }}
                     >
                       {cellValue}
@@ -165,7 +174,7 @@ const Tables = () => {
                         textOverflow: "ellipsis",
                         whiteSpace: "nowrap",
                         display: "inline-block",
-                        width: "100%",
+                        maxWidth: "100%",
                       }}
                     >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
