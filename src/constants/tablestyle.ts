@@ -43,7 +43,7 @@ const getBlockStyle = (colId: string) => {
 
 const getCellStyle = (key: string, disableBorder = false) => {
   const baseStyle: any = {
-    padding: "5px",
+    padding: "5px 8px",
     height: "40px",
     display: "flex",
     alignItems: "center",

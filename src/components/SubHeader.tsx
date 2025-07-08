@@ -61,11 +61,11 @@ const SubHeader = () => {
             color: "#333",
             flexShrink: 0,
             boxSizing: "border-box",
-            gap: "14px",
+            gap: "10px",
           }}
         >
           <div
-            className={`flex items-center gap-[14px] ${
+            className={`flex items-center gap-[10px] ${
               checkstyle(col)
                 ? "bg-[#EEEEEE] px-2 py-[2px] rounded"
                 : "justify-center"
