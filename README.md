@@ -16,21 +16,3 @@ A spreadsheet-style task table made with **React 19**, **TypeScript**, **Tailwin
 ```bash
 git clone https://github.com/hassan524/SpreadSheet.git && cd SpreadSheet && npm install && npm run dev
 ```
-
-### 📦 Install Dependencies
-
-```bash
-npm install
-```
-
-### Build for Production
-
-```bash
-npm run build
-```
-
-### For preview
-
-```bash
-npm run start
-```
