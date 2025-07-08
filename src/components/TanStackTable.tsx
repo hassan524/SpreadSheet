@@ -1,15 +1,19 @@
-import { getCellStyle } from "../constants/tablestyle";
-import columns from "../utils/columnts";
-import { data } from "../utils/table";
 import {
   useReactTable,
   getCoreRowModel,
   flexRender,
 } from "@tanstack/react-table";
+
+import columns from "../utils/columnts";
+import { data } from "../utils/table";
 import SubHeader from "./SubHeader";
+import { getCellStyle } from "../constants/tablestyle";
+import type { ColumnWithExtras } from "../utils/columnts"; 
+
+type TableData = (typeof data)[number];
 
 const Tables = () => {
-  const table = useReactTable({
+  const table = useReactTable<TableData>({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
@@ -44,13 +48,13 @@ const Tables = () => {
       <div className="min-w-[1000px]">
         <SubHeader />
 
-        {/* Table Headers */}
         <div className="w-max min-w-full">
           <div className="flex font-semibold text-sm">
             {table.getHeaderGroups().map((headerGroup) =>
               headerGroup.headers.map((header) => {
-                const key =
-                  header.column.columnDef.accessorKey || header.column.id;
+                const columnDef = header.column.columnDef as ColumnWithExtras;
+                const key = columnDef.accessorKey ?? header.column.id;
+
                 return (
                   <div
                     key={header.id}
@@ -62,28 +66,33 @@ const Tables = () => {
                     style={{
                       ...getCellStyle(key),
                       background:
-                        header.column.columnDef.background || "#FFFFFF",
+                        (header.column.columnDef as any).background ||
+                        "#FFFFFF",
                       overflow: "hidden",
                       whiteSpace: "nowrap",
                       textOverflow: "ellipsis",
                     }}
                   >
                     <div className="flex items-center gap-2 overflow-hidden text-ellipsis whitespace-nowrap">
-                      {header.column.columnDef.icon && (
+                      {(header.column.columnDef as any).icon && (
                         <i
-                          className={`${header.column.columnDef.icon} text-[#A3ACA4]`}
+                          className={`${
+                            (header.column.columnDef as any).icon
+                          } text-[#A3ACA4]`}
                         />
                       )}
-                      <span className="text-[#666C66]">
+                      <span className="text-[#666C66] cursor-pointer">
                         {flexRender(
                           header.column.columnDef.header,
                           header.getContext(),
                         )}
                       </span>
                     </div>
-                    {header.column.columnDef.icon2 && (
+                    {(header.column.columnDef as any).icon2 && (
                       <i
-                        className={`${header.column.columnDef.icon2} text-[#A3ACA4]`}
+                        className={`${
+                          (header.column.columnDef as any).icon2
+                        } text-[#A3ACA4]`}
                       />
                     )}
                   </div>
@@ -93,14 +102,14 @@ const Tables = () => {
           </div>
         </div>
 
-        {/* Table Rows */}
         {table.getRowModel().rows.map((row) => (
           <div
             key={row.id}
             className="flex text-black hover:bg-gray-50 text-sm"
           >
             {row.getVisibleCells().map((cell) => {
-              const key = cell.column.columnDef.accessorKey || cell.column.id;
+              const columnDef = cell.column.columnDef as ColumnWithExtras;
+              const key = columnDef.accessorKey ?? cell.column.id;
               const cellValue = cell.getValue();
 
               return (
@@ -150,8 +159,9 @@ const Tables = () => {
                       style={{
                         padding: "3px 15px",
                         borderRadius: "15px",
-                        backgroundColor: statusBgMap[cellValue] || "#FFFFFF",
-                        color: statusTextColorMap[cellValue] || "#333",
+                        backgroundColor:
+                          statusBgMap[String(cellValue)] || "#FFFFFF",
+                        color: statusTextColorMap[String(cellValue)] || "#333",
                         fontWeight: 500,
                         fontSize: "13px",
                         overflow: "hidden",
@@ -160,24 +170,16 @@ const Tables = () => {
                         maxWidth: "100%",
                       }}
                     >
-                      {cellValue}
+                      {String(cellValue)}
                     </span>
                   ) : key === "URL" ? (
                     <a
-                      href={cellValue}
+                      href={String(cellValue)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{
-                        textDecoration: "underline",
-                        cursor: "pointer",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                        whiteSpace: "nowrap",
-                        maxWidth: "100%",
-                        display: "inline-block",
-                      }}
+                      className="underline"
                     >
-                      {cellValue}
+                      {String(cellValue)}
                     </a>
                   ) : (
                     <span

@@ -1,5 +1,3 @@
-// utils/table.ts
-
 const realData = [
   {
     "Job Request": "Launch Social Media Campaign for Summer Collection 2025",

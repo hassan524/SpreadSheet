@@ -1,6 +1,13 @@
-import React from "react";
 
-const headerData = [
+type HeaderColumn = {
+  Subheading?: string;
+  SubHeadingIcon1?: string;
+  SubHeadingIcon2?: string;
+  background: string;
+  width: string;
+};
+
+const headerData: HeaderColumn[] = [
   { width: "4", background: "#FFFFFF" },
   {
     Subheading: "Financial Overview",
@@ -39,13 +46,13 @@ const headerData = [
 ];
 
 const SubHeader = () => {
-  const checkstyle = (col: any) => col.Subheading === "Financial Overview";
-  const isPlusIcon = (col: any) => col.SubHeadingIcon1 === "bi bi-plus-lg";
-  const isABC = (col: any) => col.Subheading === "ABC";
+  const checkstyle = (col: HeaderColumn) => col.Subheading === "Financial Overview";
+  const isPlusIcon = (col: HeaderColumn) => col.SubHeadingIcon1 === "bi bi-plus-lg";
+  const isABC = (col: HeaderColumn) => col.Subheading === "ABC";
 
   return (
     <div className="border-t border-[#EEEEEE] w-max min-w-full flex">
-      {headerData.map((col, i) => (
+      {headerData.map((col: HeaderColumn, i: number) => (
         <div
           key={i}
           className={`flex items-center ${
@@ -77,24 +84,22 @@ const SubHeader = () => {
                   isABC(col)
                     ? "text-[#A3ACA3]"
                     : isPlusIcon(col)
-                      ? "text-black text-lg"
-                      : checkstyle(col)
-                        ? "text-[#2892FE] text-lg"
-                        : "text-slate-100"
+                    ? "text-black text-lg"
+                    : checkstyle(col)
+                    ? "text-[#2892FE] text-lg"
+                    : "text-slate-100"
                 }`}
               />
             )}
-            {col.Subheading && (
-              <span className={`${checkstyle(col) ? "" : ""}`}>
-                {col.Subheading}
-              </span>
-            )}
+            {col.Subheading && <span>{col.Subheading}</span>}
           </div>
 
           {col.SubHeadingIcon2 && (
             <i
               className={`${col.SubHeadingIcon2} ${
-                checkstyle(col) ? "text-[#F48561] text-lg" : "text-[#A3ACA3]"
+                checkstyle(col)
+                  ? "text-[#F48561] text-lg hover:animate-spin cursor-pointer"
+                  : "text-[#A3ACA3]"
               }`}
             />
           )}
