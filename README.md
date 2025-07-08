@@ -5,7 +5,8 @@ A spreadsheet-style task table made with **React 19**, **TypeScript**, **Tailwin
 ## ⚙️ Tech Stack
 
 - React 19 + TypeScript  
-- Tailwind CSS 4  
+- Tailwind CSS 4
+- Shadcn UI
 - @tanstack/react-table v8  
 - Bootstrap Icons  
 - Simplebar (custom scrollbars)  
