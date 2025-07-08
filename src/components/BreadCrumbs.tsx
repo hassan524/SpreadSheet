@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -8,40 +9,41 @@ import {
 } from "./ui/breadcrumb";
 
 const BreadCrumbs = () => {
+  const [active, setActive] = useState("Spreadsheet 3");
+
+  const items = ["Workspace", "Folder 2", "Spreadsheet 3"];
+
   return (
-         <Breadcrumb>
-            <BreadcrumbList className="text-sm text-gray-600 font-medium">
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <span className="hover:text-black text-lg transition opacity-[0.7] cursor-pointer">
-                    Workspace
-                  </span>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
+    <Breadcrumb>
+      <BreadcrumbList className="text-sm text-gray-600 font-medium">
+        {items.map((item, index) => (
+          <div className="flex items-center gap-2" key={item}>
+            <BreadcrumbItem>
+              <BreadcrumbLink asChild>
+                <span
+                  onClick={() => setActive(item)}
+                  className={`text-lg transition cursor-pointer ${
+                    active === item
+                      ? "text-gray-900"
+                      : "hover:text-black opacity-[0.7]"
+                  }`}
+                >
+                  {item}
+                </span>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
 
+            {/* Add separator except after last item */}
+            {index !== items.length - 1 && (
               <BreadcrumbSeparator className="text-4xl" />
+            )}
+          </div>
+        ))}
 
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <span className="hover:text-black text-lg transition opacity-[0.7] cursor-pointer">
-                    Folder 2
-                  </span>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
+        <BreadcrumbEllipsis className="size-6 hover:text-black transition opacity-[0.7] cursor-pointer" />
+      </BreadcrumbList>
+    </Breadcrumb>
+  );
+};
 
-              <BreadcrumbSeparator />
-
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <span className="text-gray-900 text-lg cursor-pointer">
-                    Spreadsheet 3
-                  </span>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbEllipsis className="size-6 hover:text-black transition opacity-[0.7] cursor-pointer" />
-            </BreadcrumbList>
-          </Breadcrumb>
-  )
-}
-
-export default BreadCrumbs
+export default BreadCrumbs;

@@ -17,20 +17,20 @@ const Tables = () => {
 
   const statusBgMap: Record<string, string> = {
     "In Process": "#FFF3D6",
-    "Complete": "#D3F2E3",
-    "Blocked": "#FFE1DE",
+    Complete: "#D3F2E3",
+    Blocked: "#FFE1DE",
     "Need to Start": "#E2E8F0",
-    "Active": "#E1F3FF",
-    "Inactive": "#F2F2F2",
+    Active: "#E1F3FF",
+    Inactive: "#F2F2F2",
   };
 
   const statusTextColorMap: Record<string, string> = {
     "In Process": "#8C6D18",
-    "Complete": "#155724",
-    "Blocked": "#721c24",
+    Complete: "#155724",
+    Blocked: "#721c24",
     "Need to Start": "#2D3748",
-    "Active": "#004085",
-    "Inactive": "#6C757D",
+    Active: "#004085",
+    Inactive: "#6C757D",
   };
 
   const priorityTextColorMap: Record<string, string> = {
@@ -49,7 +49,8 @@ const Tables = () => {
           <div className="flex font-semibold text-sm">
             {table.getHeaderGroups().map((headerGroup) =>
               headerGroup.headers.map((header) => {
-                const key = header.column.columnDef.accessorKey || header.column.id;
+                const key =
+                  header.column.columnDef.accessorKey || header.column.id;
                 return (
                   <div
                     key={header.id}
@@ -60,7 +61,8 @@ const Tables = () => {
                     }`}
                     style={{
                       ...getCellStyle(key),
-                      background: header.column.columnDef.background || "#FFFFFF",
+                      background:
+                        header.column.columnDef.background || "#FFFFFF",
                       overflow: "hidden",
                       whiteSpace: "nowrap",
                       textOverflow: "ellipsis",
@@ -68,25 +70,35 @@ const Tables = () => {
                   >
                     <div className="flex items-center gap-2 overflow-hidden text-ellipsis whitespace-nowrap">
                       {header.column.columnDef.icon && (
-                        <i className={`${header.column.columnDef.icon} text-[#A3ACA4]`} />
+                        <i
+                          className={`${header.column.columnDef.icon} text-[#A3ACA4]`}
+                        />
                       )}
                       <span className="text-[#666C66]">
-                        {flexRender(header.column.columnDef.header, header.getContext())}
+                        {flexRender(
+                          header.column.columnDef.header,
+                          header.getContext(),
+                        )}
                       </span>
                     </div>
                     {header.column.columnDef.icon2 && (
-                      <i className={`${header.column.columnDef.icon2} text-[#A3ACA4]`} />
+                      <i
+                        className={`${header.column.columnDef.icon2} text-[#A3ACA4]`}
+                      />
                     )}
                   </div>
                 );
-              })
+              }),
             )}
           </div>
         </div>
 
         {/* Table Rows */}
         {table.getRowModel().rows.map((row) => (
-          <div key={row.id} className="flex text-black hover:bg-gray-50 text-sm">
+          <div
+            key={row.id}
+            className="flex text-black hover:bg-gray-50 text-sm"
+          >
             {row.getVisibleCells().map((cell) => {
               const key = cell.column.columnDef.accessorKey || cell.column.id;
               const cellValue = cell.getValue();
@@ -177,7 +189,10 @@ const Tables = () => {
                         maxWidth: "100%",
                       }}
                     >
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext(),
+                      )}
                     </span>
                   )}
                 </div>

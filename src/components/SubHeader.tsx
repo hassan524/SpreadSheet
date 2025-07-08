@@ -77,19 +77,15 @@ const SubHeader = () => {
                   isABC(col)
                     ? "text-[#A3ACA3]"
                     : isPlusIcon(col)
-                    ? "text-black text-lg"
-                    : checkstyle(col)
-                    ? "text-[#2892FE] text-lg"
-                    : "text-slate-100"
+                      ? "text-black text-lg"
+                      : checkstyle(col)
+                        ? "text-[#2892FE] text-lg"
+                        : "text-slate-100"
                 }`}
               />
             )}
             {col.Subheading && (
-              <span
-                className={`${
-                  checkstyle(col) ? "" : ""
-                }`}
-              >
+              <span className={`${checkstyle(col) ? "" : ""}`}>
                 {col.Subheading}
               </span>
             )}
@@ -98,9 +94,7 @@ const SubHeader = () => {
           {col.SubHeadingIcon2 && (
             <i
               className={`${col.SubHeadingIcon2} ${
-                checkstyle(col)
-                  ? "text-[#F48561] text-lg"
-                  : "text-[#A3ACA3]"
+                checkstyle(col) ? "text-[#F48561] text-lg" : "text-[#A3ACA3]"
               }`}
             />
           )}

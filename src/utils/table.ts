@@ -46,17 +46,6 @@ const realData = [
     "Ext. Value": "$1750",
   },
   {
-    "Job Request": "Create API Documentation for Dev Portal",
-    Submitted: "2025-08-05",
-    Status: "Need to Start",
-    Submitter: "Natalie Emerson Rivera",
-    URL: "https://apidocs.io/portal",
-    Assigned: "Maxwell Jefferson",
-    Priority: "High",
-    "Due Date": "2025-08-18",
-    "Ext. Value": "$2125",
-  },
-  {
     "Job Request": "Fix Critical Bugs in Payment Gateway Integration",
     Submitted: "2025-08-06",
     Status: "Blocked",
