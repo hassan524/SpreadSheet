@@ -52,6 +52,7 @@ const getCellStyle = (key: string, disableBorder = false) => {
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
     flex: "0 0 auto",
+    width: '10vw'
   };
 
   if (!disableBorder) {
@@ -65,16 +66,16 @@ const getCellStyle = (key: string, disableBorder = false) => {
     };
   }
 
-  if (key === "Job Request") {
-    return {
-      ...baseStyle,
-      width: "16vw",
-    };
-  }
+  // if (key === "Job Request") {
+  //   return {
+  //     ...baseStyle,
+  //     width: "16vw",
+  //   };
+  // }
 
   return {
     ...baseStyle,
-    width: "10vw", // exact value
+    width: "10vw",
   };
 };
 

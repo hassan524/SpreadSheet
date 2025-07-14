@@ -26,7 +26,6 @@ const Header = () => {
           <BreadCrumbs />
         </div>
 
-        {/* Notification Icon Clickable */}
         <div
           onClick={() => alert("Notifications clicked")}
           className="cursor-pointer hover:opacity-80 transition"

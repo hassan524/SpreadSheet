@@ -3,18 +3,20 @@ import {
   getCoreRowModel,
   flexRender,
 } from "@tanstack/react-table";
+import SimpleBar from "simplebar-react";
+import "simplebar-react/dist/simplebar.min.css";
 
 import columns from "../utils/columnts";
 import { data } from "../utils/table";
 import SubHeader from "./SubHeader";
 import { getCellStyle } from "../constants/tablestyle";
-import type { ColumnWithExtras } from "../utils/columnts"; 
+import type { ColumnWithExtras } from "../utils/columnts";
 
 type TableData = (typeof data)[number];
 
 const Tables = () => {
   const table = useReactTable<TableData>({
-    data,
+    data, 
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
@@ -44,10 +46,11 @@ const Tables = () => {
   };
 
   return (
-    <div className="h-[70vh] overflow-scroll min-w-full font-sans">
+    <SimpleBar className="h-[70vh] min-w-full font-sans" autoHide={true}>
       <div className="min-w-[1000px]">
-        <SubHeader />
+        {/* <SubHeader />  */}
 
+        {/* Table Headers */}
         <div className="w-max min-w-full">
           <div className="flex font-semibold text-sm">
             {table.getHeaderGroups().map((headerGroup) =>
@@ -59,41 +62,28 @@ const Tables = () => {
                   <div
                     key={header.id}
                     className={`flex items-center ${
-                      header.column.columnDef.header === "#"
+                      columnDef.header === "#"
                         ? "justify-center text-xl text-[#856404]"
                         : "justify-between"
                     }`}
                     style={{
                       ...getCellStyle(key),
-                      background:
-                        (header.column.columnDef as any).background ||
-                        "#FFFFFF",
+                      background: columnDef.background || "#FFFFFF",
                       overflow: "hidden",
                       whiteSpace: "nowrap",
                       textOverflow: "ellipsis",
                     }}
                   >
                     <div className="flex items-center gap-2 overflow-hidden text-ellipsis whitespace-nowrap">
-                      {(header.column.columnDef as any).icon && (
-                        <i
-                          className={`${
-                            (header.column.columnDef as any).icon
-                          } text-[#A3ACA4]`}
-                        />
+                      {columnDef.icon && (
+                        <i className={`${columnDef.icon} text-[#A3ACA4]`} />
                       )}
                       <span className="text-[#666C66] cursor-pointer">
-                        {flexRender(
-                          header.column.columnDef.header,
-                          header.getContext(),
-                        )}
+                        {flexRender(columnDef.header, header.getContext())}
                       </span>
                     </div>
-                    {(header.column.columnDef as any).icon2 && (
-                      <i
-                        className={`${
-                          (header.column.columnDef as any).icon2
-                        } text-[#A3ACA4]`}
-                      />
+                    {columnDef.icon2 && (
+                      <i className={`${columnDef.icon2} text-[#A3ACA4]`} />
                     )}
                   </div>
                 );
@@ -102,6 +92,7 @@ const Tables = () => {
           </div>
         </div>
 
+        {/* Table Rows */}
         {table.getRowModel().rows.map((row) => (
           <div
             key={row.id}
@@ -178,6 +169,13 @@ const Tables = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="underline"
+                      style={{
+                        display: "inline-block",
+                        maxWidth: "100%",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        whiteSpace: "nowrap",
+                      }}
                     >
                       {String(cellValue)}
                     </a>
@@ -203,7 +201,7 @@ const Tables = () => {
           </div>
         ))}
       </div>
-    </div>
+    </SimpleBar>
   );
 };
 

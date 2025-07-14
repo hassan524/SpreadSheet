@@ -33,7 +33,6 @@ const BreadCrumbs = () => {
               </BreadcrumbLink>
             </BreadcrumbItem>
 
-            {/* Add separator except after last item */}
             {index !== items.length - 1 && (
               <BreadcrumbSeparator className="text-4xl" />
             )}
